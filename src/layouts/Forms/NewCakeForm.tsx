@@ -17,14 +17,14 @@ export const NewCakeForm = () => {
     const [name, setName] = useState("");
 
     return (
-        <div className="container m-5">
+        <div className="container m-0">
             <div className="d-none d-lg-block">
-                <div className="row g-0 mt-5">
-                    <div className="col-sm-6 col-md-6 col-lg-4">
+                <div className="row g-0 mt-0">
+                    <div className="col-sm-8 col-md-8 col-lg-8">
                         <h4>Aggiungi una nuova torta</h4>
                         <form>
                             <div className="form-group row my-4">
-                                <select className="form-select" id="inlineFormCustomSelect">
+                                <select className="form-select form-select-sm" id="inlineFormCustomSelect">
                                     <option selected>Category...</option>
                                     <option value="1">Compleanno</option>
                                     <option value="2">Fidanzamento</option>
@@ -33,29 +33,31 @@ export const NewCakeForm = () => {
                                 </select>
                             </div>
                             <div className="form-group row my-4 ">
-                                <label className="col-sm-2 col-form-label col-form-label-lg">Titolo</label>
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Titolo</label>
                                 <div className="col-sm-10">
-                                    <input type="email" className="form-control form-control-md" id="colFormLabel" />
+                                    <input type="email" className="form-control form-control-sm" id="colFormLabel" />
                                 </div>
                             </div>
                             <div className="form-group row my-4 ">
-                                <label className="col-sm-2 col-form-label col-form-label-lg">Occasione</label>
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Occasione</label>
                                 <div className="col-sm-10">
-                                    <input type="email" className="form-control form-control-md" id="colFormLabel" />
+                                    <input type="email" className="form-control form-control-sm" id="colFormLabel" />
                                 </div>
                             </div>
                             <div className="form-group row my-4 ">
-                                <label className="col-sm-2 col-form-label col-form-label-lg">Descrizione</label>
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Descrizione</label>
                                 <textarea className="form-control" id="exampleFormControlTextarea1"></textarea>
                             </div>
                             <div className="form-group row my-4 ">
-                                <label className="col-sm-2 col-form-label col-form-label-lg">Peso</label>
-                                <textarea className="form-control" id="exampleFormControlTextarea1"></textarea>
-                            </div>
-                            <div className="form-group row my-4 ">
-                                <label className="col-sm-2 col-form-label col-form-label-lg">Numero di persone</label>
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Peso</label>
                                 <div className="col-sm-10">
-                                    <input type="email" className="form-control form-control-md" id="colFormLabel" />
+                                    <input type="email" className="form-control form-control-sm" id="colFormLabel" />
+                                </div>
+                            </div>
+                            <div className="form-group row my-4 ">
+                                <label className="col-sm-2 col-form-label col-form-label-sm">Numero di persone</label>
+                                <div className="col-sm-10">
+                                    <input type="email" className="form-control form-control-sm" id="colFormLabel" />
                                 </div>
                             </div>
                             <div className="form-group row my-4 ">

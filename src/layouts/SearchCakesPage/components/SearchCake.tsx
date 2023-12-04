@@ -1,7 +1,11 @@
+import { useState } from "react";
 import CakeModel from "../../../models/CakeModel";
+import { NewCakeForm } from "../../Forms/NewCakeForm";
+import { EditCakeForm } from "../../Forms/EditCakeForm";
 
 export const SearchCake: React.FC<{ cake: CakeModel }> = (props) => {
 
+    const [isEditMode, setIsEditMode] = useState(false);
 
     const deleteCake = () => {
         console.log(props.cake.id);
@@ -12,6 +16,15 @@ export const SearchCake: React.FC<{ cake: CakeModel }> = (props) => {
 
     }
 
+
+
+    function editCake() {
+        setIsEditMode(true);
+    }
+
+    function cancelEdit() {
+        setIsEditMode(false);
+    }
 
     return (
         <div className="card mt-3 shadow p-3 mb-3 bg-body rounded">
@@ -59,7 +72,7 @@ export const SearchCake: React.FC<{ cake: CakeModel }> = (props) => {
                 </div>
                 <div className="col-md-4 d-flex justify-content-center align-items-center">
                     <div className="row g-0">
-                        <button className="btn btn-md main-color text-white mt-2">
+                        <button className="btn btn-md main-color text-white mt-2" onClick={() => editCake()}>
                             Modifica
                         </button>
                         <button className="btn btn-md btn-danger text-white mt-2" onClick={() => deleteCake()}>
@@ -67,6 +80,13 @@ export const SearchCake: React.FC<{ cake: CakeModel }> = (props) => {
                         </button>
                     </div>
                 </div>
+            </div>
+            <div className="row g-0">
+                {isEditMode &&
+                    <div className="card mt-3 shadow p-3 bg-body rounded">
+                        <EditCakeForm cake={props.cake} onCancel={() => cancelEdit} />
+                    </div>
+                }
             </div>
         </div>
     )

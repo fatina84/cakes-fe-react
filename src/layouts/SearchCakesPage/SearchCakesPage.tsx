@@ -3,6 +3,7 @@ import CakeModel from "../../models/CakeModel";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { SearchCake } from "./components/SearchCake";
 import { Pagination } from "../Utils/Pagination";
+import { NewCakeForm } from "../Forms/NewCakeForm";
 
 export const SearchCakesPage = () => {
     const [cakes, setCakes] = useState<CakeModel[]>([]);
@@ -172,11 +173,37 @@ export const SearchCakesPage = () => {
                         </div>
                         <div className="col-2">
                             <div className="d-flex">
-                                <button className="btn btn-success" onClick={() => searchHandleChange()}>
-                                    Add a new cake
+                                <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Aggiungi una torta
                                 </button>
                             </div>
                         </div>
+
+                        <div className="col-2">
+                            <div className="d-flex">
+                                <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-lg">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div className="modal-body">
+                                                <NewCakeForm />
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                                <button type="button" className="btn btn-primary">Conferma</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                     {totalNumberOfCakes > 0 ?
                         <>
