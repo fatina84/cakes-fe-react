@@ -3,9 +3,9 @@ import CakeModel from "../../../models/CakeModel";
 export const SearchCake: React.FC<{ cake: CakeModel }> = (props) => {
 
 
-    const deleteCake = (id: number) => {
-        console.log(id);
-        fetch(`http://localhost:8080/api/cakes/${id}`, {
+    const deleteCake = () => {
+        console.log(props.cake.id);
+        fetch(`http://localhost:8080/api/cakes/${props.cake.id}`, {
             method: "DELETE",
         })
             .then(response => response.json())
@@ -62,7 +62,7 @@ export const SearchCake: React.FC<{ cake: CakeModel }> = (props) => {
                         <button className="btn btn-md main-color text-white mt-2">
                             Modifica
                         </button>
-                        <button className="btn btn-md btn-danger text-white mt-2" onClick={() => deleteCake(19)}>
+                        <button className="btn btn-md btn-danger text-white mt-2" onClick={() => deleteCake()}>
                             Cancella
                         </button>
                     </div>

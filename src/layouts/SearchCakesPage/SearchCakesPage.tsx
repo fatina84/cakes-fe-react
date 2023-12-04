@@ -45,9 +45,10 @@ export const SearchCakesPage = () => {
             setTotalPages(responseJson.page.totalPages)
 
             const loadedCakes: CakeModel[] = [];
+            console.log(responseData)
             for (const key in responseData) {
                 loadedCakes.push({
-                    id: responseData[key].id,
+                    id: responseData[key]._links.self.href.substring(32),
                     title: responseData[key].title,
                     description: responseData[key].description,
                     occasion: responseData[key].category,
@@ -55,6 +56,7 @@ export const SearchCakesPage = () => {
                     img: responseData[key].img
                 })
             }
+            console.log(cakes);
             setCakes(loadedCakes);
             setIsLoading(false);
         };
