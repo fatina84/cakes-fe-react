@@ -57,36 +57,35 @@ export const SearchCake: React.FC<{ cake: CakeModel }> = (props) => {
                             />}
                     </div>
                 </div>
-                <div className="col-md-6">
-                    <div className="card-body">
-                        <h5 className="card-title">
-                            {props.cake.occasion}
-                        </h5>
-                        <h4 className="card-text">
-                            {props.cake.title}
-                        </h4>
-                        <p>
-                            {props.cake.description}
-                        </p>
-                    </div>
-                </div>
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                    <div className="row g-0">
-                        <button className="btn btn-md main-color text-white mt-2" onClick={() => editCake()}>
-                            Modifica
-                        </button>
-                        <button className="btn btn-md btn-danger text-white mt-2" onClick={() => deleteCake()}>
-                            Cancella
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div className="row g-0">
-                {isEditMode &&
-                    <div className="card mt-3 shadow p-3 bg-body rounded">
-                        <EditCakeForm cake={props.cake} onCancel={() => cancelEdit} />
-                    </div>
+                {!isEditMode ?
+                    <div className="col-md-6">
+                        <div className="card-body">
+                            <h4 className="card-title">
+                                {props.cake.title}
+                            </h4>
+                            <h6 className="card-text">
+                                Occasione: {props.cake.occasion}
+                            </h6>
+                            <p>
+                                {props.cake.description}
+                            </p>
+                        </div>
+                    </div> :
+                    <EditCakeForm cake={props.cake} onCancel={() => cancelEdit} />
                 }
+                <div className="col-md-4 d-flex justify-content-center align-items-center">
+                    {!isEditMode &&
+                        <div className="row g-0">
+                            <button className="btn btn-md main-color text-white mt-2" onClick={() => editCake()}>
+                                Modifica
+                            </button>
+                            <button className="btn btn-md btn-danger text-white mt-2" onClick={() => deleteCake()}>
+                                Cancella
+                            </button>
+                        </div>
+                    }
+
+                </div>
             </div>
         </div>
     )

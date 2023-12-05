@@ -52,7 +52,7 @@ export const SearchCakesPage = () => {
                     id: responseData[key]._links.self.href.substring(32),
                     title: responseData[key].title,
                     description: responseData[key].description,
-                    occasion: responseData[key].category,
+                    occasion: responseData[key].occasion,
                     numberportions: responseData[key].numberportions,
                     img: responseData[key].img
                 })
