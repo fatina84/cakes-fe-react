@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import CakeModel from "../../models/CakeModel";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
-import { SearchCake } from "./components/SearchCake";
 import { Pagination } from "../Utils/Pagination";
+import { SearchCake } from "./components/SearchCake";
 import { NewCakeForm } from "../Forms/NewCakeForm";
 
 export const SearchCakesPage = () => {
@@ -15,7 +15,7 @@ export const SearchCakesPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [searchUrl, setSearchUrl] = useState('');
     const [search, setSearch] = useState('');
-    const [categorySelection, setCategorySelection] = useState('Occasione');
+    const [categorySelection, setCategorySelection] = useState('Cake category');
     const [showSuccessAlert, setshowSuccessAlert] = useState(false);
 
     useEffect(() => {
@@ -24,7 +24,6 @@ export const SearchCakesPage = () => {
             const baseUrl: string = "http://localhost:8080/api/cakes";
 
             let url: string = '';
-            console.log(cakes)
             if (searchUrl === '') {
                 url = `${baseUrl}?page=${currentPage - 1}&size=${cakesPerPage}`;
             } else {
@@ -33,7 +32,6 @@ export const SearchCakesPage = () => {
             }
 
             const response = await fetch(url);
-            console.log(url);
 
             if (!response.ok) {
                 throw new Error('Something went wrong!');
@@ -47,7 +45,6 @@ export const SearchCakesPage = () => {
             setTotalPages(responseJson.page.totalPages)
 
             const loadedCakes: CakeModel[] = [];
-            console.log(responseData)
             for (const key in responseData) {
                 loadedCakes.push({
                     id: responseData[key]._links.self.href.substring(32),
@@ -58,7 +55,6 @@ export const SearchCakesPage = () => {
                     img: responseData[key].img
                 })
             }
-            console.log(cakes);
             setCakes(loadedCakes);
             setIsLoading(false);
         };
@@ -83,7 +79,6 @@ export const SearchCakesPage = () => {
         )
     }
 
-
     const searchHandleChange = () => {
         setCurrentPage(1);
         if (search === '') {
@@ -91,7 +86,7 @@ export const SearchCakesPage = () => {
         } else {
             setSearchUrl(`/search/findByTitleContaining?title=${search}&page=<pageNumber>&size=${cakesPerPage}`)
         }
-        setCategorySelection('Occasione');
+        setCategorySelection('Cake category');
     }
 
     const categoryField = (value: string) => {
@@ -103,22 +98,19 @@ export const SearchCakesPage = () => {
             value.toLowerCase() === 'mom'
         ) {
             setCategorySelection(value);
-            setSearchUrl(`?occasion=${value}&page=<pageNumber>&size=${cakesPerPage}`)
+            setSearchUrl(`/search/findByOccasion?occasion=${value}&page=<pageNumber>&size=${cakesPerPage}`)
+            setSearch('')
         } else {
-            setCategorySelection('All');
+            setCategorySelection('Tutte');
             setSearchUrl(`?page=<pageNumber>$size=${cakesPerPage}`)
         }
-        console.log(value);
     }
-
 
     const indexOfLastCake: number = currentPage * cakesPerPage;
     const indexOfFirstCake: number = indexOfLastCake - cakesPerPage;
     let lastItem = cakesPerPage * currentPage <= totalNumberOfCakes ? cakesPerPage * currentPage : totalNumberOfCakes;
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
-
 
     return (
         <div>
@@ -132,8 +124,8 @@ export const SearchCakesPage = () => {
                     <div className="row mt-5">
                         <div className="col-6">
                             <div className="d-flex">
-                                <input id="Search" className="form-control me-2" type="search"
-                                    placeholder="Search" aria-labelledby="Search"
+                                <input id='Search' className="form-control me-2" type="search"
+                                    placeholder="Search" value={search} aria-labelledby="Search"
                                     onChange={e => setSearch(e.target.value)} />
                                 <button className="btn btn-outline-success" onClick={() => searchHandleChange()}>
                                     Search
@@ -177,27 +169,23 @@ export const SearchCakesPage = () => {
                         </div>
                         <div className="col-2">
                             <div className="d-flex">
-                                <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddCake">
-                                    Aggiungi una torta
+                                <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Aggiungi torta
                                 </button>
                             </div>
                         </div>
 
                         <div className="col-2">
                             <div className="d-flex">
-                                <div className="modal fade" id="openModalAddCake" tabIndex={-1} aria-labelledby="openModalAddCakeLabel" aria-hidden="true">
-                                    <div className="modal-dialog modal-lg">
+                                <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div className="modal-dialog modal-lg modal-dialog-centered">
                                         <div className="modal-content">
                                             <div className="modal-header">
-                                                <h5 className="modal-title" id="openModalAddCakeLabel">Aggiungi una nuova torta</h5>
+                                                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div className="modal-body">
                                                 <NewCakeForm />
-                                            </div>
-                                            <div className="modal-footer">
-                                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
-                                                <button type="button" className="btn btn-primary">Conferma</button>
                                             </div>
                                         </div>
                                     </div>
@@ -224,10 +212,10 @@ export const SearchCakesPage = () => {
                         :
                         <div className="m-5">
                             <h3>
-                                Can't find what you're looking for?
+                                Non trovi quello che cerchi?
                             </h3>
                             <a type="button" className="btn main-color btn-md px-4 me-md-2 fw-bold text-white" href="#">
-                                Library Services
+                                Contattaci
                             </a>
                         </div>
                     }

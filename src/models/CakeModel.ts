@@ -1,11 +1,11 @@
 class CakeModel {
     id: number;
     title: string;
-    occasion?: string;
-    description?: string;
+    occasion: string;
+    description: string;
     weight?: number;
     date?: Date;
-    numberportions: number;
+    numberportions?: number;
     img?: string;
 
     constructor(id: number, title: string, occasion: string,
