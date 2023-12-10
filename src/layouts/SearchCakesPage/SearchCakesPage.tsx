@@ -15,7 +15,7 @@ export const SearchCakesPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [searchUrl, setSearchUrl] = useState('');
     const [search, setSearch] = useState('');
-    const [categorySelection, setCategorySelection] = useState('Cake category');
+    const [categorySelection, setCategorySelection] = useState('Occasione');
     const [showSuccessAlert, setshowSuccessAlert] = useState(false);
 
     useEffect(() => {
@@ -33,6 +33,7 @@ export const SearchCakesPage = () => {
             }
 
             const response = await fetch(url);
+            console.log(url);
 
             if (!response.ok) {
                 throw new Error('Something went wrong!');
@@ -82,6 +83,7 @@ export const SearchCakesPage = () => {
         )
     }
 
+
     const searchHandleChange = () => {
         setCurrentPage(1);
         if (search === '') {
@@ -89,7 +91,7 @@ export const SearchCakesPage = () => {
         } else {
             setSearchUrl(`/search/findByTitleContaining?title=${search}&page=<pageNumber>&size=${cakesPerPage}`)
         }
-        setCategorySelection('Cake category');
+        setCategorySelection('Occasione');
     }
 
     const categoryField = (value: string) => {
@@ -101,12 +103,14 @@ export const SearchCakesPage = () => {
             value.toLowerCase() === 'mom'
         ) {
             setCategorySelection(value);
-            setSearchUrl(`/search/findByCategory?category=${value}&page=<pageNumber>&size=${cakesPerPage}`)
+            setSearchUrl(`?occasion=${value}&page=<pageNumber>&size=${cakesPerPage}`)
         } else {
             setCategorySelection('All');
             setSearchUrl(`?page=<pageNumber>$size=${cakesPerPage}`)
         }
+        console.log(value);
     }
+
 
     const indexOfLastCake: number = currentPage * cakesPerPage;
     const indexOfFirstCake: number = indexOfLastCake - cakesPerPage;
@@ -143,9 +147,9 @@ export const SearchCakesPage = () => {
                                     {categorySelection}
                                 </button>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li onClick={() => categoryField('All')}>
+                                    <li onClick={() => categoryField('Tutte')}>
                                         <a className="dropdown-item" href="#">
-                                            All
+                                            Tutte
                                         </a>
                                     </li>
                                     <li onClick={() => categoryField('HBD')}>
@@ -173,7 +177,7 @@ export const SearchCakesPage = () => {
                         </div>
                         <div className="col-2">
                             <div className="d-flex">
-                                <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#openModalAddCake">
                                     Aggiungi una torta
                                 </button>
                             </div>
@@ -181,11 +185,11 @@ export const SearchCakesPage = () => {
 
                         <div className="col-2">
                             <div className="d-flex">
-                                <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal fade" id="openModalAddCake" tabIndex={-1} aria-labelledby="openModalAddCakeLabel" aria-hidden="true">
                                     <div className="modal-dialog modal-lg">
                                         <div className="modal-content">
                                             <div className="modal-header">
-                                                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                <h5 className="modal-title" id="openModalAddCakeLabel">Aggiungi una nuova torta</h5>
                                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div className="modal-body">

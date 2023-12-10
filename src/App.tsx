@@ -7,7 +7,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { SearchCakesPage } from './layouts/SearchCakesPage/SearchCakesPage';
 export const App = () => {
   return (
-    <div className='d-flex flex-column min-vh-100'>
+    <div className='d-flex flex-column min-vh-100 main-bg'>
       <div className='d-flex flex-column min-vh-100'>
         <Navbar />
         <div className='flex-grow-1'>

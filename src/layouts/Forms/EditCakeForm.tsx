@@ -10,8 +10,8 @@ export const EditCakeForm: React.FC<{ cake: CakeModel, onCancel: Function }> = (
         setInputs(values => ({ ...values, [name]: value }))
     }
 
-    const handleSubmit = (event: any) => {
-        event.preventDefault();
+    const handleSubmit = () => {
+        ;
         console.log(inputs);
     }
 
@@ -54,10 +54,26 @@ export const EditCakeForm: React.FC<{ cake: CakeModel, onCancel: Function }> = (
                         </div>
                         <div className="col-4">
 
-                            <button type="button" className="btn btn-success ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Conferma modifiche
+                            <button type="button" className="btn btn-success ml-2" data-bs-toggle="modal" data-bs-target="#confirmAdd">
+                                Salva modifiche
                             </button>
-
+                            <div className="modal fade" id="confirmAdd" aria-labelledby="confirmAddModalLabel" aria-hidden="true">
+                                <div className="modal-dialog">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h5 className="modal-title" id="confirmAddModalLabel">Modal title</h5>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            Le modifiche verranno salvate al click su Conferma.
+                                        </div>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                                            <button type="button" className="btn btn-primary" onClick={() => handleSubmit()}>Conferma</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>

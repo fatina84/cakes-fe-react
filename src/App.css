@@ -48,3 +48,9 @@
     pointer-events: none;
     cursor: default;
 }
+
+.main-bg {
+
+    background-color: #fff8f2;
+    opacity: var(--25);
+}
